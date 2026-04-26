@@ -1,0 +1,53 @@
+data:
+  start_date: "2025-01-01"
+  end_date: "2026-03-31"
+  input_window: 24
+  horizons: [1, 6, 12, 24]
+  target_col: temperature_2m
+  feature_cols:
+    - temperature_2m
+    - relative_humidity_2m
+    - wind_speed_10m
+    - wind_direction_10m
+    - surface_pressure
+  time_features:
+    - hour_sin
+    - hour_cos
+    - dow_sin
+    - dow_cos
+    - doy_sin
+    - doy_cos
+  train_ratio: 0.7
+  val_ratio: 0.15
+
+graph:
+  method: distance_weighted_knn
+  distance_threshold_km: 80
+  k_neighbors: 5
+  distance_sigma_km: 120
+
+model:
+  hidden_dim: 64
+  gcn_out_dim: 64
+  temporal_hidden_dim: 64
+  temporal_layers: 2
+  dropout: 0.2
+  loss: huber
+  predict_residual: true
+
+train:
+  seed: 42
+  epochs: 15
+  batch_size: 32
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  device: cpu
+  patience: 2
+  tune: true
+  lstm_baseline_epochs: 6
+  sweep:
+    - input_window: 24
+      hidden_dim: 32
+      dropout: 0.55
+      learning_rate: 0.0003
+      batch_size: 32

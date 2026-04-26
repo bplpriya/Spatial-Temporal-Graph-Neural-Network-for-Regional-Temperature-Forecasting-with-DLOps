@@ -1,0 +1,65 @@
+stages:
+  ingest:
+    cmd: python -m src.data_ingestion
+    deps:
+      - src/data_ingestion.py
+      - configs/stations.yaml
+      - params.yaml
+    outs:
+      - data/raw/weather_raw.csv
+
+  preprocess:
+    cmd: python -m src.preprocess
+    deps:
+      - src/preprocess.py
+      - src/graph.py
+      - data/raw/weather_raw.csv
+      - configs/stations.yaml
+      - params.yaml
+    outs:
+      - data/processed/dataset.npz
+      - data/processed/scaler.joblib
+
+  train:
+    cmd: python -m src.train
+    deps:
+      - src/train.py
+      - src/model.py
+      - src/dataset.py
+      - data/processed/dataset.npz
+      - params.yaml
+    outs:
+      - models/best_model.pt
+      - models/best_config.json
+      - models/lstm_baseline.pt
+      - reports/training_history.csv
+      - reports/baseline_lstm_training_history.csv
+      - reports/experiments/sweep_results.csv
+      - reports/experiments/all_training_history.csv
+
+  evaluate:
+    cmd: python -m src.evaluate
+    deps:
+      - src/evaluate.py
+      - src/model.py
+      - models/best_model.pt
+      - models/best_config.json
+      - models/lstm_baseline.pt
+      - data/processed/dataset.npz
+      - reports/training_history.csv
+      - params.yaml
+    outs:
+      - reports/metrics.json
+      - reports/tables/horizon_metrics.csv
+      - reports/tables/model_horizon_metrics.csv
+      - reports/tables/baseline_comparison.csv
+      - reports/tables/station_metrics.csv
+      - reports/predictions/sample_predictions.csv
+      - reports/predictions/predictions_long.csv
+      - reports/plots/actual_vs_predicted.png
+      - reports/plots/baseline_comparison.png
+      - reports/plots/horizon_metrics.png
+      - reports/plots/poster_summary.png
+      - reports/plots/station_metrics.png
+      - reports/plots/training_loss_curve.png
+      - reports/best_run_summary.md

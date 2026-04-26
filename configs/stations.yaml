@@ -1,0 +1,25 @@
+stations:
+  - name: Atlanta
+    latitude: 33.7490
+    longitude: -84.3880
+  - name: Marietta
+    latitude: 33.9526
+    longitude: -84.5499
+  - name: Alpharetta
+    latitude: 34.0754
+    longitude: -84.2941
+  - name: Decatur
+    latitude: 33.7748
+    longitude: -84.2963
+  - name: Roswell
+    latitude: 34.0232
+    longitude: -84.3616
+  - name: Peachtree_City
+    latitude: 33.3968
+    longitude: -84.5958
+  - name: Lawrenceville
+    latitude: 33.9562
+    longitude: -83.9879
+  - name: Sandy_Springs
+    latitude: 33.9304
+    longitude: -84.3733

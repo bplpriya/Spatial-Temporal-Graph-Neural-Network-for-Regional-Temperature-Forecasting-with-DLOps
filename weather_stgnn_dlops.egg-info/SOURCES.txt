@@ -1,0 +1,15 @@
+README.md
+setup.py
+src/__init__.py
+src/data_ingestion.py
+src/dataset.py
+src/evaluate.py
+src/graph.py
+src/model.py
+src/preprocess.py
+src/train.py
+src/utils.py
+weather_stgnn_dlops.egg-info/PKG-INFO
+weather_stgnn_dlops.egg-info/SOURCES.txt
+weather_stgnn_dlops.egg-info/dependency_links.txt
+weather_stgnn_dlops.egg-info/top_level.txt
